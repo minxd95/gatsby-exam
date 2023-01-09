@@ -1,9 +1,20 @@
 import * as React from "react";
-import { Link } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 
 const Layout = ({ pageTitle, children }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
+
   return (
     <div>
+      <header>{data.site.siteMetadata.title}</header>
       <nav>
         <ul>
           <li>
@@ -11,6 +22,9 @@ const Layout = ({ pageTitle, children }) => {
           </li>
           <li>
             <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/blog">Blog</Link>
           </li>
         </ul>
       </nav>
